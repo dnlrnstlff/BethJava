@@ -6,7 +6,7 @@ A simple way to easily delete entries on Parse Core using Cloud Code. Just sched
 */
 
 //Name the parse job
-Parse.Cloud.job("deleteMessages", function(request, status) {
+Parse.Cloud.job("*PARSE JOB NAME*", function(request, status) {
 
   Parse.Cloud.useMasterKey();
 
@@ -17,18 +17,18 @@ Parse.Cloud.job("deleteMessages", function(request, status) {
     var tsYesterday = ts - (7 * 24 * 3600);
     var dateYesterday = new Date(tsYesterday*1000);
 
-	//Parse table query. (Case-Sen duh)
-    var query = new Parse.Query("Messages");
+	//Parse table query. (Case)
+    var query = new Parse.Query("*TABLE NAME*");
 
-	//Parse row query. (Camel-case duh)
-    query.lessThan("updatedAt", dateYesterday);
+	//Parse row query. (Camel)
+    query.lessThan("*TABLE COLUMN", dateYesterday);
 
     query.find({
         success: function(result) {
             for(var i=0; i<result.length; i++) {
                 result[i].destroy({
                     success: function(object) {
-                        status.success("Delete job completed");
+                        status.success("Delete job complete");
                         alert('Delete Successful');
                     },
                     error: function(object, error) {
